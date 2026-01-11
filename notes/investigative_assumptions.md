@@ -36,9 +36,7 @@ The strongest signals of such common control are often infrastructural rather th
 
 
 
-I multiple customer accounts consistently originate activity from the same device identifier,
-
-those accounts are unlikely to represent independent actors.
+If multiple customer accounts consistently originate activity from the same device identifier, those accounts are unlikely to represent independent actors.
 
 
 
