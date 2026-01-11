@@ -1,3 +1,6 @@
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
 import csv
 import networkx as nx
 from collections import defaultdict
@@ -66,6 +69,45 @@ def analyse_clusters(G):
     """
     Identify connected components and print cluster summaries.
     """
+def draw_network(G, output_path):
+    """
+    Render the account network as a static image for investigator review.
+    Strong links (shared device) are drawn solid.
+    Weak links (shared IP) are drawn dashed.
+    """
+    pos = nx.spring_layout(G, seed=42)
+
+    strong_edges = [
+        (u, v) for u, v, d in G.edges(data=True)
+        if d.get("reason") == "shared_device"
+    ]
+    weak_edges = [
+        (u, v) for u, v, d in G.edges(data=True)
+        if d.get("reason") == "shared_ip"
+    ]
+
+    plt.figure(figsize=(8, 6))
+
+    nx.draw_networkx_nodes(G, pos, node_size=700)
+    nx.draw_networkx_labels(G, pos, font_size=9)
+
+    nx.draw_networkx_edges(
+        G, pos,
+        edgelist=strong_edges,
+        width=2
+    )
+    nx.draw_networkx_edges(
+        G, pos,
+        edgelist=weak_edges,
+        style="dashed",
+        width=1
+    )
+
+    plt.axis("off")
+    plt.tight_layout()
+    plt.savefig(output_path, dpi=150, bbox_inches="tight")
+    plt.close()
+
     clusters = list(nx.connected_components(G))
 
     print(f"\nDetected {len(clusters)} clusters:\n")
@@ -95,10 +137,13 @@ def analyse_clusters(G):
 
 def main():
     csv_path = "data/sample_data.csv"
+    output_image = "outputs/example_network.png"
+
     records = load_accounts(csv_path)
     graph = build_account_graph(records)
+
     analyse_clusters(graph)
+    draw_network(graph, output_image)
 
 if __name__ == "__main__":
     main()
-
