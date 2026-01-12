@@ -72,3 +72,75 @@ Baseline established. Investigative assumptions defined before any code is writt
 
 
 
+\## Run the analysis
+
+python src/mule\_hunter.py
+
+
+
+Outputs:
+
+
+
+* Console summary of detected clusters
+
+
+
+* Network image saved to:
+
+
+
+&nbsp;	outputs/example\_network.png
+
+
+
+* Interpreting the Output
+
+
+
+&nbsp;	- Tightly connected clusters suggest potential organised control
+
+&nbsp;	- Highly central nodes may indicate coordination roles
+
+&nbsp;	- Weakly linked clusters require contextual review
+
+&nbsp;	- Isolated nodes typically represent independent accounts
+
+&nbsp;       - All outputs are investigative leads only.
+
+
+
+\## What This Tool Does NOT Do
+
+
+
+&nbsp;	- It does not predict fraud likelihood
+
+&nbsp;	- It does not replace transaction monitoring systems
+
+&nbsp;	- It does not operate in real time
+
+&nbsp;	- It does not make enforcement or regulatory decisions
+
+
+
+\## Assumptions and Limits
+
+
+
+&nbsp;	- Designed for batch, exploratory analysis
+
+&nbsp;	- Uses synthetic sample data
+
+&nbsp;	- Optimised for clarity over scale
+
+&nbsp;	- False positives are expected and acceptable
+
+
+
+\## Detailed assumptions are documented in:
+
+
+
+notes/investigative\_assumptions.md
+
